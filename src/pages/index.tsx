@@ -1,7 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../../styles/Home.module.scss'
+import Button from '~/components/button/Button'
+import styles from '~/styles/Home.module.scss'
 
 const Home: NextPage = () => {
  return (
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
    </Head>
 
    <main className={styles.main}>
+    <Button>sdf</Button>
     <h1 className={styles.title}>
      Welcome to <a href="https://nextjs.org">Next.js!</a>
     </h1>
