@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react'
+import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 import * as _ from 'lodash'
 
 type CheckType = {
@@ -8,11 +8,6 @@ type CheckType = {
 function useChecks(data: CheckType) {
  const [checkboxes, setCheckboxes] = useState<CheckType>(data)
  const [isAllChecked, setIsAllChecked] = useState(_.values(checkboxes).every((checked) => checked))
-
- useEffect(() => {
-  setCheckboxes(data)
-  setIsAllChecked(_.values(data).every((checked) => checked))
- }, [data])
 
  const handleChecked = useCallback((e: ChangeEvent<HTMLInputElement>) => {
   const { id, checked } = e.target
@@ -38,6 +33,11 @@ function useChecks(data: CheckType) {
   setIsAllChecked(checked)
  }, [])
 
+ const handleSetChecked = useCallback((data: CheckType) => {
+  setCheckboxes(data)
+  setIsAllChecked(_.values(data).every((checked) => checked))
+ }, [])
+
  const flatIds = useMemo(() => Object.keys(checkboxes), [checkboxes])
 
  return {
@@ -46,6 +46,7 @@ function useChecks(data: CheckType) {
   flatIds,
   handleChecked,
   handleAllChecked,
+  handleSetChecked,
  }
 }
 
