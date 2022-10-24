@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Button from '~/components/button/Button'
+import VerticalCarousel from '~/components/organism/verticalCarousel/VerticalCarousel'
 import styles from '~/styles/Home.module.scss'
 
 const Home: NextPage = () => {
@@ -15,6 +16,28 @@ const Home: NextPage = () => {
 
    <main className={styles.main}>
     <Button>sdf</Button>
+    <div
+     style={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      width: '100%',
+      height: '150px',
+      margin: '0 auto',
+      background: '#7FfFbF',
+     }}
+    >
+     <VerticalCarousel offsetRadius={2}>
+      <div>#1</div>
+      <div>#2</div>
+      <div>#3</div>
+      <div>#4</div>
+      <div>#1</div>
+      <div>#2</div>
+      <div>#3</div>
+      <div>#4</div>
+     </VerticalCarousel>
+    </div>
     <h1 className={styles.title}>
      Welcome to <a href="https://nextjs.org">Next.js!</a>
     </h1>
