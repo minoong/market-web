@@ -18,7 +18,6 @@ function VerticalCarousel(props: Props) {
 
  useInterval(
   () => {
-   console.log(1)
    setCurrentIndex(modBySlidesLength(currentIndex + 1))
   },
   isPlaying ? 5000 : null,

@@ -38,25 +38,25 @@ function Header() {
        transition={{ type: 'spring', stiffness: 400, damping: 10 }}
       >
        <Link href="/">
-        <a>
-         <Pin fill="white" size={30} />
-        </a>
+        <Pin fill="white" size={30} />
        </Link>
       </motion.div>
      </div>
      <ul className="hidden sm:flex items-center space-x-6 ml-20">
       <li>
-       <Link href="/exchange">
-        <a className="cursor-pointer hover:bg-sky-700 rounded-full transition duration-100 ease-out text-white font-bold p-3">
-         거래소
-        </a>
+       <Link
+        href="/exchange"
+        className="cursor-pointer hover:bg-sky-700 rounded-full transition duration-100 ease-out text-white font-bold p-3"
+       >
+        거래소
        </Link>
       </li>
       <li>
-       <Link href="/exchange">
-        <a className="cursor-pointer hover:bg-sky-700 rounded-full transition duration-100 ease-out text-white font-bold p-3">
-         입출금
-        </a>
+       <Link
+        href="/exchange"
+        className="cursor-pointer hover:bg-sky-700 rounded-full transition duration-100 ease-out text-white font-bold p-3"
+       >
+        입출금
        </Link>
       </li>
      </ul>

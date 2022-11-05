@@ -72,7 +72,6 @@ function OtpInput(props: Props) {
 
  const handleInputKeyDown = useCallback(
   (e: React.KeyboardEvent<HTMLInputElement>) => {
-   console.log(e.key)
    if (e.key === 'Backspace') {
     e.preventDefault()
     setNewValues('')
