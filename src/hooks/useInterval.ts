@@ -8,7 +8,6 @@ function useInterval(callback: () => void, delay: number | null) {
  }, [callback])
 
  useEffect(() => {
-  console.log('delay', delay)
   if (!delay && delay !== 0) {
    return
   }
