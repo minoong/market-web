@@ -58,7 +58,7 @@ function VerticalCarousel(props: Props) {
 
  return (
   <div
-   className="relative flex justify-center w-full h-full"
+   className="relative flex justify-center w-full h-full overflow-hidden"
    onMouseOver={() => setPlaying(false)}
    onMouseOut={() => setPlaying(true)}
   >
@@ -78,4 +78,4 @@ function VerticalCarousel(props: Props) {
  )
 }
 
-export default VerticalCarousel
+export default React.memo(VerticalCarousel)

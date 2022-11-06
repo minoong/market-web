@@ -50,7 +50,7 @@ function Slide(props: Props) {
       }}
       className={`${styles.container} w-full`}
      >
-      <div className={`${styles.contents} w-full`} onClick={() => moveSlide(offsetFromMiddle)}>
+      <div className={`${styles.contents}`} onClick={() => moveSlide(offsetFromMiddle)}>
        {children}
       </div>
      </animated.div>
@@ -60,4 +60,4 @@ function Slide(props: Props) {
  )
 }
 
-export default Slide
+export default React.memo(Slide)
