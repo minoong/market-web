@@ -1,0 +1,53 @@
+.market-card-wrapper {
+ display: flex;
+ width: 100%;
+ align-items: center;
+ padding: 1rem;
+ gap: 0.675rem;
+ font-size: 1rem;
+ cursor: pointer;
+
+ &.RISE {
+  color: #c84a31;
+ }
+ &.FALL {
+  color: #1261c4;
+ }
+}
+
+.market-candle-wrapper {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.market-symbol-current-price {
+ text-align: right;
+
+ flex: 1;
+ & > div {
+  font-weight: bold;
+  font-size: 1.765rem;
+
+  &::after {
+   content: ' KRW';
+   color: #7d7d7d;
+   font-size: 1rem;
+  }
+ }
+}
+
+.market-symbol-wrapper {
+ display: flex;
+ flex-direction: column;
+
+ :first-child {
+  color: #1b1b1b;
+  font-weight: bold;
+ }
+
+ :last-child {
+  color: #898989;
+  font-size: 0.765rem;
+ }
+}

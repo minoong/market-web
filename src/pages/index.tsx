@@ -1,11 +1,27 @@
-import type { NextPage } from 'next'
+import { dehydrate, QueryClient } from '@tanstack/react-query'
+import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { getMarketsTicker } from '~/api/upbit/marketsTicker'
+import { getMarketSymbols } from '~/api/upbit/marketSymbols'
 import Button from '~/components/button/Button'
+import MarketCard from '~/components/molecules/marketCard/MarketCard'
 import VerticalCarousel from '~/components/organism/verticalCarousel/VerticalCarousel'
+import { useAppSelector } from '~/features/hooks'
+import { wrapper } from '~/features/store'
+import { invoke } from '~/features/upblit/market/symbolSlice'
+import { useMartetsTicker } from '~/hooks/queries/useMartetsTicker'
 import styles from '~/styles/Home.module.scss'
 
 const Home: NextPage = () => {
+ const marketsSymbol = useAppSelector((state) =>
+  state.marketSymbol.symbol
+   .slice(0, 10)
+   .map(({ market }) => market)
+   .join(','),
+ )
+ const { data, refetch } = useMartetsTicker(marketsSymbol)
+
  return (
   <div className={styles.container}>
    <Head>
@@ -15,27 +31,27 @@ const Home: NextPage = () => {
    </Head>
 
    <main className={styles.main}>
-    <Button>sdf</Button>
+    <Button onClick={() => refetch()}>sdf </Button>
     <div
      style={{
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       width: '100%',
-      height: '150px',
+      height: '110px',
       margin: '0 auto',
-      background: '#7FfFbF',
+      background: '#ededed',
+      borderRadius: '1rem',
      }}
     >
-     <VerticalCarousel offsetRadius={2}>
-      <div>#1</div>
-      <div>#2</div>
-      <div>#3</div>
-      <div>#4</div>
-      <div>#1</div>
-      <div>#2</div>
-      <div>#3</div>
-      <div>#4</div>
+     <VerticalCarousel offsetRadius={4}>
+      {data?.map((data) => (
+       <MarketCard
+        key={data.market}
+        logo={`https://static.upbit.com/logos/${data.market.split('-')[1]}.png`}
+        marketSymbol={data.market}
+       />
+      ))}
      </VerticalCarousel>
     </div>
     <h1 className={styles.title}>
@@ -87,5 +103,24 @@ const Home: NextPage = () => {
   </div>
  )
 }
+
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async () => {
+ const krwMarkets = (await getMarketSymbols()).filter(({ market }) => market.startsWith('KRW-'))
+ store.dispatch(invoke(krwMarkets))
+
+ const symbolSnake = krwMarkets
+  .slice(0, 10)
+  .map(({ market }) => market)
+  .join(',')
+
+ const queryClient = new QueryClient()
+ await queryClient.prefetchQuery(['markets', symbolSnake], () => getMarketsTicker(symbolSnake))
+
+ return {
+  props: {
+   dehydratedState: dehydrate(queryClient),
+  },
+ }
+})
 
 export default Home

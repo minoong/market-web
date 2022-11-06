@@ -10,6 +10,9 @@ const nextConfig = {
 
   return config
  },
+ images: {
+  domains: ['static.upbit.com'],
+ },
 }
 
 module.exports = nextConfig
